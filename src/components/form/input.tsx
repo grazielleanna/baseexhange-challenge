@@ -20,7 +20,7 @@ export function Input({ control, label, name, description, placeholder, ...rest 
             control={control}
             name={name}
             render={({ field }) => (
-                <FormItem>
+                <FormItem className="w-full">
                     <FormLabel className="mb-3 font-bold">{label}</FormLabel>
                     <FormControl>
                         <InputBase

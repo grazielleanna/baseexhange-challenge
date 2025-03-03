@@ -12,19 +12,22 @@ interface SelectProps {
     name: string;
     placeholder?: string;
     description?: string | ReactNode;
+    classes?: {
+        trigger?: string;
+    }
 }
 
-export function Select({ control, label, name, options, description, placeholder }: SelectProps) {
+export function Select({ control, label, name, options, description, placeholder, classes }: SelectProps) {
     return (
         <FormField
             control={control}
             name={name}
             render={({ field }) => (
-                <FormItem>
+                <FormItem className="w-full">
                     <FormLabel className="mb-3 font-bold">{label}</FormLabel>
                     <SelectBase onValueChange={field.onChange} defaultValue={field.value}>
                         <FormControl>
-                            <SelectTrigger>
+                            <SelectTrigger className={classes?.trigger}>
                                 <SelectValue placeholder={placeholder} />
                             </SelectTrigger>
                         </FormControl>

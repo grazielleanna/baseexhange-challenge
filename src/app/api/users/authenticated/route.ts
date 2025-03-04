@@ -14,6 +14,11 @@ export async function GET() {
         }
 
         const jwtDecoded = jwt.verify(jwtCookies, process.env.JWT_SECRET as string) as JwtPayload;
+
+        if (!jwtDecoded) {
+            throw Error("Unauthorized.");
+        }
+
         const user = await prisma.users.findUnique({
             where: {
                 id: jwtDecoded.id,

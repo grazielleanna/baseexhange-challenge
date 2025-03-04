@@ -1,22 +1,20 @@
 "use client"
 
 import React, { HTMLProps } from 'react'
-import { Table as TableBase, TableBody, TableHead, TableRow, TableFooter, TableCell, TableHeader } from './ui/table';
+import { Table as TableBase, TableBody, TableHead, TableRow, TableCell, TableHeader } from './ui/table';
 
 import {
-    Column,
     ColumnDef,
     flexRender,
     getCoreRowModel,
     getFilteredRowModel,
     getPaginationRowModel,
-    Table as ReactTable,
     useReactTable,
 } from '@tanstack/react-table'
 
 interface TableProps {
     data: any[];
-    columns: ColumnDef<unknown, any>[];
+    columns: ColumnDef<any, any>[];
 }
 
 export function Table({ data, columns }: TableProps) {
@@ -46,7 +44,7 @@ export function Table({ data, columns }: TableProps) {
                                 <TableHead
                                     key={header.id}
                                     colSpan={header.colSpan}
-                                    className='text-[##DDDDDD] bg-header p-4 border-r-[#242424] border-r-[1px] text-center font-light'
+                                    className='text-[#DDDDDD] bg-header p-4 border-r-[#242424] border-r-[1px] text-center font-light'
                                 >
                                     {header.isPlaceholder ? null : (
                                         <>
@@ -54,11 +52,6 @@ export function Table({ data, columns }: TableProps) {
                                                 header.column.columnDef.header,
                                                 header.getContext()
                                             )}
-                                            {header.column.getCanFilter() ? (
-                                                <div>
-                                                    <Filter column={header.column} table={table} />
-                                                </div>
-                                            ) : null}
                                         </>
                                     )}
                                 </TableHead>
@@ -73,7 +66,7 @@ export function Table({ data, columns }: TableProps) {
                         <TableRow key={row.id} className={index % 2 === 0 ? 'bg-[#151515]' : 'bg-[#1D1D1D]'}>
                             {row.getVisibleCells().map(cell => {
                                 return (
-                                    <TableCell key={cell.id}>
+                                    <TableCell key={cell.id} className='p-4 text-center text-sm'>
                                         {flexRender(
                                             cell.column.columnDef.cell,
                                             cell.getContext()
@@ -86,49 +79,6 @@ export function Table({ data, columns }: TableProps) {
                 })}
             </TableBody>
         </TableBase>
-    )
-}
-
-function Filter({
-    column,
-    table,
-}: {
-    column: Column<any, any>
-    table: ReactTable<any>
-}) {
-    const firstValue = table
-        .getPreFilteredRowModel()
-        .flatRows[0]?.getValue(column.id)
-
-    return typeof firstValue === 'number' ? (
-        <div className="flex space-x-2">
-            <input
-                type="number"
-                value={((column.getFilterValue() as any)?.[0] ?? '') as string}
-                onChange={e =>
-                    column.setFilterValue((old: any) => [e.target.value, old?.[1]])
-                }
-                placeholder={`Min`}
-                className="w-24 border shadow rounded"
-            />
-            <input
-                type="number"
-                value={((column.getFilterValue() as any)?.[1] ?? '') as string}
-                onChange={e =>
-                    column.setFilterValue((old: any) => [old?.[0], e.target.value])
-                }
-                placeholder={`Max`}
-                className="w-24 border shadow rounded"
-            />
-        </div>
-    ) : (
-        <input
-            type="text"
-            value={(column.getFilterValue() ?? '') as string}
-            onChange={e => column.setFilterValue(e.target.value)}
-            placeholder={`Search...`}
-            className="w-36 border shadow rounded"
-        />
     )
 }
 

@@ -10,7 +10,7 @@ export async function GET(request: NextRequest) {
         const instrument = searchParams.get('instrument');
         const status = searchParams.get('status');
 
-        const hasFilter = orderId || instrument || status;
+        const hasFilter = !!orderId || !!instrument || !!status;
 
         const orders = await prisma.orders.findMany({
             ...(hasFilter && {
@@ -19,7 +19,9 @@ export async function GET(request: NextRequest) {
                         id: Number(orderId)
                     })),
                     ...(instrument && ({
-                        instrument
+                        instrument: {
+                            contains: instrument.toLocaleLowerCase(),
+                        }
                     })),
                     ...(status && ({
                         status
@@ -32,4 +34,4 @@ export async function GET(request: NextRequest) {
     } catch (error) {
         return NextResponse.json({ message: error instanceof Error ? error?.message : error }, { status: 500 });
     }
-}  
+}

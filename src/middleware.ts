@@ -34,12 +34,12 @@ async function getUserAuthentication() {
 
         if (jwtCookie) {
             const jwtDecoded = await jose.jwtVerify(jwtCookie as string, new TextEncoder().encode(process.env.JWT_SECRET))
-
+           
             if (!jwtDecoded) {
                 return false;
             }
 
-            return jwtDecoded.payload;
+            return true;
         }
 
         return false;

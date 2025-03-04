@@ -25,7 +25,7 @@ export function Select({ control, label, name, options, description, placeholder
             render={({ field }) => (
                 <FormItem className="w-full">
                     <FormLabel className="mb-3 font-bold">{label}</FormLabel>
-                    <SelectBase onValueChange={field.onChange} defaultValue={field.value}>
+                    <SelectBase onValueChange={field.onChange} value={field.value}>
                         <FormControl>
                             <SelectTrigger className={classes?.trigger}>
                                 <SelectValue placeholder={placeholder} />

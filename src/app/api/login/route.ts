@@ -39,7 +39,8 @@ async function checkIfUserCredentialsAreValid(body: LoginModel) {
 
     const user = await prisma.users.findFirst({
         where: {
-            username
+            username,
+            active: true
         }
     });
 
@@ -47,7 +48,7 @@ async function checkIfUserCredentialsAreValid(body: LoginModel) {
         const isValidCredentials = await argon2.verify(user.password, password);
 
         if (!isValidCredentials) {
-            throw Error('Email or password incorrect.');
+            throw Error('Username or password incorrect.');
 
         }
 
@@ -57,7 +58,7 @@ async function checkIfUserCredentialsAreValid(body: LoginModel) {
     }
 
 
-    throw Error('Email or password incorrect.');
+    throw Error('Username or password incorrect.');
 }
 
 /**

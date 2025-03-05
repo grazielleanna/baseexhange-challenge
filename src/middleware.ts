@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 import * as jose from 'jose'
@@ -34,7 +36,7 @@ async function getUserAuthentication() {
 
         if (jwtCookie) {
             const jwtDecoded = await jose.jwtVerify(jwtCookie as string, new TextEncoder().encode(process.env.JWT_SECRET))
-           
+
             if (!jwtDecoded) {
                 return false;
             }

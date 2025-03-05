@@ -31,6 +31,7 @@ export function AdminFilter() {
 
     useEffect(() => {
         insertFilterValuesInForm();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [status]);
 
     /**

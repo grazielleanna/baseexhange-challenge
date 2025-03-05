@@ -13,7 +13,7 @@ import { useSearchParamsContext } from "@/contexts/search-params";
 
 export function AdminList() {
 
-    const ordersColumns = useMemo<ColumnDef<Orders, any>[]>(
+    const ordersColumns = useMemo<ColumnDef<Orders, unknown>[]>(
         () => [
             {
                 id: 'select',

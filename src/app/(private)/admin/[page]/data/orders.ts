@@ -1,4 +1,4 @@
-import { Orders, Users } from "@prisma/client";
+import { Orders } from "@prisma/client";
 import { useQuery } from "@tanstack/react-query";
 
 /**

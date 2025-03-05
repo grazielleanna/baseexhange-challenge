@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 import { NextRequest, NextResponse } from "next/server";
 import argon2 from 'argon2';
 import jwt from 'jsonwebtoken';

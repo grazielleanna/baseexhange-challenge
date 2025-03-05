@@ -1,13 +1,11 @@
 import { ComponentProps, ReactNode } from "react";
-import { Control, FieldValues } from "react-hook-form";
+import { Control } from "react-hook-form";
 
 import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
 import { Input as InputBase } from '../ui/input';
-import { Option } from "./types";
-import { cn } from "@/lib/utils";
 
 interface SelectProps extends ComponentProps<typeof InputBase> {
-    control: Control<FieldValues>;
+    control: Control<any>;
     label: string;
     name: string;
     placeholder?: string;

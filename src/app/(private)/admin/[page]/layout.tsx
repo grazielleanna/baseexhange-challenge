@@ -1,3 +1,4 @@
+import { SearchParamsProvider } from "@/contexts/search-params"
 import { AdminHeader } from "../../components/header"
 
 export default async function AdminLayout({
@@ -11,8 +12,10 @@ export default async function AdminLayout({
 
     return (
         <>
-            <AdminHeader page={page} />
-            {children}
+            <SearchParamsProvider>
+                <AdminHeader page={page} />
+                {children}
+            </SearchParamsProvider>
         </>
     )
 }

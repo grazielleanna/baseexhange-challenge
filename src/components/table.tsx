@@ -1,5 +1,5 @@
 "use client"
-
+/* eslint-disable @typescript-eslint/no-explicit-any, react-hooks/exhaustive-deps */
 import React, { HTMLProps } from 'react'
 import { Table as TableBase, TableBody, TableHead, TableRow, TableCell, TableHeader } from './ui/table';
 
@@ -13,8 +13,8 @@ import {
 } from '@tanstack/react-table'
 
 interface TableProps {
-    data: any[];
-    columns: ColumnDef<any, any>[];
+    data: unknown[];
+    columns: ColumnDef<any, unknown>[];
 }
 
 export function Table({ data, columns }: TableProps) {

@@ -5,6 +5,7 @@ import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessa
 import { Input as InputBase } from '../ui/input';
 
 interface SelectProps extends ComponentProps<typeof InputBase> {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     control: Control<any>;
     label: string;
     name: string;

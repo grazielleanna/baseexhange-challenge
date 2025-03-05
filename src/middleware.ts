@@ -8,6 +8,7 @@ export async function middleware(request: NextRequest) {
     const pathname = request.nextUrl.pathname;
 
     const isApiRoute = pathname.startsWith('/api');
+    const isLoginRoute = pathname === '/';
 
     const userIsAuthenticated = await getUserAuthentication();
 
@@ -15,7 +16,13 @@ export async function middleware(request: NextRequest) {
         if (isApiRoute) {
             return NextResponse.json({ message: 'Unauthorized!' }, { status: 401 })
         } else {
-            return NextResponse.redirect(new URL('/', request.url));
+            if (pathname !== '/') {
+                return NextResponse.redirect(new URL('/unauthorized', request.url));
+            }
+        }
+    } else {
+        if (isLoginRoute) {
+            return NextResponse.redirect(new URL('/admin/orders', request.url));
         }
     }
 
@@ -51,5 +58,5 @@ async function getUserAuthentication() {
 }
 
 export const config = {
-    matcher: ["/admin/:path*", "/api/users/:path*", "/api/orders/:path*"],
+    matcher: ['/', "/admin/:path*", "/api/users/:path*", "/api/orders/:path*"],
 };

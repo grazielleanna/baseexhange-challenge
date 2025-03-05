@@ -11,14 +11,14 @@ export default function Home() {
 
         <div className="mt-9 flex items-center justify-between">
           <Link
-            href="/forgot-password"
+            href="/"
             className="font-bold text-sm hover:text-white/80 transition-colors"
           >
             Esqueci a senha
           </Link>
 
           <Link
-            href="/sign-up"
+            href="/"
             className="font-bold text-sm hover:text-white/80 transition-colors"
           >
             Criar conta
